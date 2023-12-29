@@ -1,9 +1,9 @@
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, StyleSheet, Button } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StackParamList } from "../App";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CurrencyExchange from "./CurrencyExchange";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Tab = createBottomTabNavigator(); //tab navigavtion
 
@@ -21,10 +21,6 @@ const Dashboard: React.FC<DashboardProps> = ({ navigation }) => {
         color="#841584"
         accessibilityLabel="Open an account button"
       />
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={Dashboard} />
-        <Tab.Screen name="CurrencyExchange" component={CurrencyExchange} />
-      </Tab.Navigator>
     </SafeAreaView>
   );
 };

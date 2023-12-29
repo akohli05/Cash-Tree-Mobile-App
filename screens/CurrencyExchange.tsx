@@ -1,12 +1,12 @@
 import { SetStateAction, useState } from "react";
-import { TextInput } from "react-native";
+import { Linking, TextInput, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DropDown from "../components/DropDown";
 import currencyCountries from "../constants/currency";
 
 const CurrencyExchange = () => {
   const [amount, onChangeAmount] = useState("");
-  const [value, setValue] = useState("fruit");
+  const [value, setValue] = useState("");
 
   const handleChange = (event: {
     target: { value: SetStateAction<string> };
@@ -23,7 +23,11 @@ const CurrencyExchange = () => {
         keyboardType="numeric"
       />
 
-      <a href="https://www.amdoren.com">Amdoren</a>
+      <Text
+        style={{ color: "blue" }}
+        onPress={() => Linking.openURL("https://www.amdoren.com")}
+      ></Text>
+
       <DropDown
         label="Hi"
         name="test"

@@ -5,26 +5,37 @@ import { StyleSheet } from "react-native";
 import Dashboard from "./screens/Dashboard";
 import SplashScreen from "./screens/SplashScreen";
 import LearnMore from "./screens/LearnMore";
-import * as DefaultSplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import CurrencyExchange from "./screens/CurrencyExchange";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 export type StackParamList = {
   SplashScreen: undefined;
-  Dashboard: undefined;
+  Home: undefined;
   LearnMore: undefined;
 };
 
 const Stack = createNativeStackNavigator<StackParamList>();
+const Tab = createBottomTabNavigator(); //tab navigavtion
+
+function Home() {
+  return (
+    <Tab.Navigator initialRouteName="Dashboard">
+      <Tab.Screen name="Dashboard" component={Dashboard} />
+      <Tab.Screen name="CurrencyExchange" component={CurrencyExchange} />
+    </Tab.Navigator>
+  );
+}
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="SplashScreen"
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="LearnMore" component={LearnMore} />
       </Stack.Navigator>
     </NavigationContainer>

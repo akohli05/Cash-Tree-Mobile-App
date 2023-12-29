@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, ImageBackground, Animated } from "react-native";
 import { StackParamList } from "../App";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -39,7 +39,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate("Dashboard");
+      navigation.navigate("Home");
     }, 3000);
   }, []);
 
