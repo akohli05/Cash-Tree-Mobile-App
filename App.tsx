@@ -19,7 +19,10 @@ const Tab = createBottomTabNavigator(); //tab navigavtion
 
 function Home() {
   return (
-    <Tab.Navigator initialRouteName="Dashboard">
+    <Tab.Navigator
+      initialRouteName="Dashboard"
+      screenOptions={{ headerShown: false }}
+    >
       <Tab.Screen name="Dashboard" component={Dashboard} />
       <Tab.Screen name="CurrencyExchange" component={CurrencyExchange} />
     </Tab.Navigator>
