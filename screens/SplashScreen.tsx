@@ -3,6 +3,7 @@ import { StyleSheet, ImageBackground, Animated } from "react-native";
 import { StackParamList } from "../App";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StackActions } from "@react-navigation/native";
 
 type SplashScreenProps = {
   navigation: NativeStackNavigationProp<StackParamList>;
@@ -39,7 +40,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate("Home");
+      navigation.dispatch(StackActions.replace("Home"));
     }, 3000);
   }, []);
 

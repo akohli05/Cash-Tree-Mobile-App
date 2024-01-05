@@ -7,6 +7,8 @@ import SplashScreen from "./screens/SplashScreen";
 import LearnMore from "./screens/LearnMore";
 import CurrencyExchange from "./screens/CurrencyExchange";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type StackParamList = {
   SplashScreen: undefined;
@@ -38,7 +40,11 @@ export default function App() {
           component={SplashScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerBackVisible: false }}
+        />
         <Stack.Screen name="LearnMore" component={LearnMore} />
       </Stack.Navigator>
     </NavigationContainer>
