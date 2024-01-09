@@ -1,7 +1,8 @@
-import { Text, StyleSheet, Button } from "react-native";
+import { Text, StyleSheet, Pressable } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StackParamList } from "../App";
 import { SafeAreaView } from "react-native-safe-area-context";
+import React from "react";
 
 type DashboardProps = {
   navigation: NativeStackNavigationProp<StackParamList>;
@@ -9,26 +10,45 @@ type DashboardProps = {
 
 const Dashboard: React.FC<DashboardProps> = ({ navigation }) => {
   return (
-    <SafeAreaView>
-      <Text style={styles.text}>Welcome to CashTree!</Text>
-      <Button
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Welcome to CashTree!</Text>
+      <Pressable
         onPress={() => navigation.navigate("LearnMore")}
-        title="Open an Account"
         accessibilityLabel="Open an account button"
-      />
+        style={styles.openAccountButton}
+      >
+        <Text style={styles.buttonText}>{"Open an Account"}</Text>
+      </Pressable>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  background: {
+  container: {
     display: "flex",
     flex: 1,
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
-  text: {
+  title: {
+    position: "absolute",
+    left: 10,
+    right: 0,
+    top: 15,
+    margin: "auto",
     color: "#6db369",
+    fontSize: 30,
+  },
+  openAccountButton: {
+    width: "60%",
+    height: 60,
+    padding: 15,
+    backgroundColor: "lightgrey",
+    borderRadius: 20,
+  },
+  buttonText: {
+    textAlign: "center",
     fontSize: 20,
   },
 });

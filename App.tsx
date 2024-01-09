@@ -1,14 +1,15 @@
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet } from "react-native";
+import { Button, StyleSheet } from "react-native";
 import Dashboard from "./screens/Dashboard";
 import SplashScreen from "./screens/SplashScreen";
 import LearnMore from "./screens/LearnMore";
 import CurrencyExchange from "./screens/CurrencyExchange";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import Header from "./components/Header";
+import { deviceHeight } from "./constants/device";
+import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
 
 export type StackParamList = {
   SplashScreen: undefined;
@@ -19,22 +20,71 @@ export type StackParamList = {
 const Stack = createNativeStackNavigator<StackParamList>();
 const Tab = createBottomTabNavigator(); //tab navigavtion
 
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "white",
+  },
+};
+
 function Home() {
   return (
     <Tab.Navigator
       initialRouteName="Dashboard"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: "#c1dc86",
+          height: deviceHeight * 0.08,
+          paddingBottom: 5,
+          paddingTop: 7,
+          borderTopLeftRadius: 24,
+          borderTopRightRadius: 24,
+          borderLeftWidth: 0.2,
+          borderRightWidth: 0.2,
+          overflow: "hidden",
+        },
+        tabBarActiveTintColor: "black",
+        tabBarInactiveTintColor: "black",
+        tabBarLabelStyle: {
+          fontSize: 20,
+        },
+      }}
     >
-      <Tab.Screen name="Dashboard" component={Dashboard} />
-      <Tab.Screen name="CurrencyExchange" component={CurrencyExchange} />
+      <Tab.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color="black" size={35} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="CurrencyExchange"
+        component={CurrencyExchange}
+        options={{
+          tabBarLabel: "Exchange",
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="exchange" size={33} color="black" />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="SplashScreen">
+    <NavigationContainer theme={MyTheme}>
+      <Stack.Navigator
+        initialRouteName="SplashScreen"
+        screenOptions={{
+          headerShown: true,
+        }}
+      >
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -43,9 +93,15 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{ headerBackVisible: false }}
+          options={{
+            header: () => <Header title="Dashboard" />,
+          }}
         />
-        <Stack.Screen name="LearnMore" component={LearnMore} />
+        <Stack.Screen
+          name="LearnMore"
+          component={LearnMore}
+          options={{ header: () => <Header title="Learn More" /> }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -57,5 +113,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  tabBar: {
+    backgroundColor: "#c1dc86",
+    height: deviceHeight * 0.08,
+    paddingBottom: 5,
+    paddingTop: 7,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    borderLeftWidth: 0.2,
+    borderRightWidth: 0.2,
+    position: "absolute",
+    overflow: "hidden",
   },
 });
