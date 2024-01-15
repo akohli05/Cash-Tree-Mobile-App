@@ -10,11 +10,17 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Header from "./components/Header";
 import { deviceHeight } from "./constants/device";
 import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
+import AccountSelection from "./screens/AccountSelection";
+import CreateAccountForm from "./screens/CreateAccountForm";
+import CustomerInformation from "./screens/CustomerInformation";
 
 export type StackParamList = {
   SplashScreen: undefined;
   Home: undefined;
   LearnMore: undefined;
+  CreateAccountForm: undefined;
+  AccountSelection: undefined;
+  CustomerInformation: undefined;
 };
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -101,6 +107,21 @@ export default function App() {
           name="LearnMore"
           component={LearnMore}
           options={{ header: () => <Header title="Learn More" /> }}
+        />
+        <Stack.Screen
+          name="CreateAccountForm"
+          component={CreateAccountForm}
+          options={{ header: () => <Header title="New Account Form" /> }}
+        />
+        <Stack.Screen
+          name="AccountSelection"
+          component={AccountSelection}
+          options={{ header: () => <Header title="Account Type" /> }}
+        />
+        <Stack.Screen
+          name="CustomerInformation"
+          component={CustomerInformation}
+          options={{ header: () => <Header title="Customer Information" /> }}
         />
       </Stack.Navigator>
     </NavigationContainer>

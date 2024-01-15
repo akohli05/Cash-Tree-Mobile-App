@@ -14,10 +14,10 @@ const Dashboard: React.FC<DashboardProps> = ({ navigation }) => {
       <Text style={styles.title}>Welcome to CashTree!</Text>
       <Pressable
         onPress={() => navigation.navigate("LearnMore")}
-        accessibilityLabel="Open an account button"
-        style={styles.openAccountButton}
+        accessibilityLabel="Get Started button"
+        style={styles.getStartedButton}
       >
-        <Text style={styles.buttonText}>{"Open an Account"}</Text>
+        <Text style={styles.buttonText}>Get Started</Text>
       </Pressable>
     </SafeAreaView>
   );
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     color: "#6db369",
     fontSize: 30,
   },
-  openAccountButton: {
+  getStartedButton: {
     width: "60%",
     height: 60,
     padding: 15,
