@@ -1,26 +1,17 @@
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Pressable,
-} from "react-native";
+import { View, StyleSheet, Text, Pressable } from "react-native";
 import Savings from "../assets/savings.svg";
 import Checking from "../assets/checking.svg";
 import MoneyMarket from "../assets/moneymarket.svg";
 import CD from "../assets/cd.svg";
+import { AccountType } from "../context/ApplicationContext";
 
 type IconCardProps = {
   title: string;
-  selectedAccountType: string;
+  value: AccountType;
   onPress: (value: string) => void;
 };
 
-const IconCard: React.FC<IconCardProps> = ({
-  title,
-  selectedAccountType,
-  onPress,
-}) => {
+const IconCard: React.FC<IconCardProps> = ({ title, onPress, value }) => {
   function accountTypeIcon() {
     switch (title) {
       case "Savings":
@@ -35,7 +26,7 @@ const IconCard: React.FC<IconCardProps> = ({
   }
 
   function getBackgroundColor() {
-    if (selectedAccountType === title) {
+    if (value === title) {
       return { backgroundColor: "#faeeed" };
     } else {
       return { backgroundColor: "lightblue" };

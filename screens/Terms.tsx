@@ -1,12 +1,13 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet, Text } from "react-native";
+import { termsAndConditions } from "../constants/termsAndConditions";
 
 type TermsProps = {};
 
 const Terms: React.FC<TermsProps> = ({}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Just some terms and conditions</Text>
+      <Text style={styles.bankInformationText}>{termsAndConditions}</Text>
     </SafeAreaView>
   );
 };
@@ -21,8 +22,8 @@ const styles = StyleSheet.create({
   },
   bankInformationText: {
     width: 350,
+    height: "auto",
     position: "absolute",
-    top: 15,
     margin: 10,
     color: "#6db369",
     fontSize: 20,

@@ -1,7 +1,7 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, StyleSheet, Button, Pressable } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { StackParamList } from "../App";
+import App, { StackParamList } from "../App";
 import AccountSelection from "./AccountSelection";
 import Stepper from "react-native-stepper-ui";
 import { useState } from "react";
@@ -20,17 +20,19 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
 }) => {
   const [active, setActive] = useState(0);
   return (
-    <SafeAreaView style={styles.container}>
-      <Stepper
-        active={active}
-        content={content}
-        onBack={() => setActive((p) => p - 1)}
-        onFinish={() => alert("Finish")}
-        onNext={() => setActive((p) => p + 1)}
-        buttonStyle={styles.stepperButtons}
-        buttonTextStyle={styles.stepperButtonsText}
-      />
-    </SafeAreaView>
+    <ApplicationProvider>
+      <SafeAreaView style={styles.container}>
+        <Stepper
+          active={active}
+          content={content}
+          onBack={() => setActive((p) => p - 1)}
+          onFinish={() => alert("Finish")}
+          onNext={() => setActive((p) => p + 1)}
+          buttonStyle={styles.stepperButtons}
+          buttonTextStyle={styles.stepperButtonsText}
+        />
+      </SafeAreaView>
+    </ApplicationProvider>
   );
 };
 
@@ -43,13 +45,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   stepperButtons: {
-    width: "60%",
+    marginVertical: 50,
+    marginHorizontal: "auto",
+    width: 160,
     height: 60,
     padding: 15,
     backgroundColor: "lightgrey",
     borderRadius: 20,
   },
   stepperButtonsText: {
+    color: "black",
     textAlign: "center",
     fontSize: 20,
   },

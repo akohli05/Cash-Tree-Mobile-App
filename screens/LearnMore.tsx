@@ -28,7 +28,7 @@ const LearnMore: React.FC<LearnMoreProps> = ({ navigation }) => {
         description={learnMoreCardContent3}
       />
       <Pressable
-        onPress={() => navigation.navigate("CreateAccountForm")}
+        onPress={() => navigation.navigate("AccountSelection")}
         accessibilityLabel="Create Account button"
         style={styles.createAccountButton}
       >

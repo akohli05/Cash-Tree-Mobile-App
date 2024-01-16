@@ -1,31 +1,40 @@
+import { Control, Controller } from "react-hook-form";
 import { StyleSheet, TextInput, View, Text } from "react-native";
+import { Customer } from "../context/ApplicationContext";
 
 type TextFieldProps = {
   placeholder: string;
-  value: string;
-  onChangeText: React.Dispatch<React.SetStateAction<string>>;
   inputMode: string;
   label: string;
+  control: Control<Customer, any>;
 };
 
 const TextField: React.FC<TextFieldProps> = ({
+  control,
   placeholder,
-  value,
-  onChangeText,
   inputMode,
   label,
 }) => {
   return (
-    <View style={styles.textFieldContainer}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeText}
-        value={value}
-        placeholder={placeholder}
-        inputMode={"text" || inputMode}
-      />
-    </View>
+    <Controller
+      control={control}
+      name={label}
+      rules={{
+        required: true,
+      }}
+      render={({ field: { onChange, value } }) => (
+        <View style={styles.textFieldContainer}>
+          <Text style={styles.label}>{label}</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={onChange}
+            value={value}
+            placeholder={placeholder}
+            inputMode={"text" || inputMode}
+          />
+        </View>
+      )}
+    />
   );
 };
 

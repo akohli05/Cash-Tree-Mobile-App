@@ -13,6 +13,7 @@ import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
 import AccountSelection from "./screens/AccountSelection";
 import CreateAccountForm from "./screens/CreateAccountForm";
 import CustomerInformation from "./screens/CustomerInformation";
+import Terms from "./screens/Terms";
 
 export type StackParamList = {
   SplashScreen: undefined;
@@ -21,6 +22,7 @@ export type StackParamList = {
   CreateAccountForm: undefined;
   AccountSelection: undefined;
   CustomerInformation: undefined;
+  Terms: undefined;
 };
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -116,12 +118,17 @@ export default function App() {
         <Stack.Screen
           name="AccountSelection"
           component={AccountSelection}
-          options={{ header: () => <Header title="Account Type" /> }}
+          options={{ header: () => <Header title="Account Selection" /> }}
         />
         <Stack.Screen
           name="CustomerInformation"
           component={CustomerInformation}
-          options={{ header: () => <Header title="Customer Information" /> }}
+          options={{ header: () => <Header title="Basics About You" /> }}
+        />
+        <Stack.Screen
+          name="Terms"
+          component={Terms}
+          options={{ header: () => <Header title="Terms" /> }}
         />
       </Stack.Navigator>
     </NavigationContainer>

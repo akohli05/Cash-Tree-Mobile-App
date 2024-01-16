@@ -1,90 +1,117 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StyleSheet, TextInput } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StackParamList } from "../App";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
 import TextField from "../components/TextField";
+import { useForm } from "react-hook-form";
+import {
+  AccountType,
+  ApplicationContext,
+  Customer,
+} from "../context/ApplicationContext";
+import { useContext } from "react";
 
 type CustomerInformationProps = {};
 
 const CustomerInformation: React.FC<CustomerInformationProps> = ({}) => {
   const navigation: NativeStackNavigationProp<StackParamList> = useNavigation();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [socialSecurity, setSocialSecurity] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [homeAddress, setHomeAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+
+  const applicationContext = useContext(ApplicationContext);
+
+  const onSave = (customer: Customer) => {
+    //applicationContext.updateCustomer(customer);
+
+    applicationContext.updateCustomer(customer);
+
+    //navigate to Terms
+    navigation.navigate("Terms");
+  };
+
+  //Form and context set up
+  const customerFormContext = useForm<Customer>({
+    defaultValues: {
+      firstName: applicationContext.state.customer?.firstName,
+      lastName: applicationContext.state.customer?.lastName,
+      birthDate: applicationContext.state.customer?.birthDate,
+      socialSecurity: applicationContext.state.customer?.socialSecurity,
+      email: applicationContext.state.customer?.email,
+      personalPhone: applicationContext.state.customer?.personalPhone,
+      address: applicationContext.state.customer?.address,
+      city: applicationContext.state.customer?.city,
+      state: applicationContext.state.customer?.state,
+    },
+  });
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = customerFormContext;
 
   return (
     <SafeAreaView style={styles.container}>
       <TextField
-        onChangeText={setFirstName}
-        value={firstName}
+        control={control}
         placeholder="first name"
         inputMode="text"
         label="First Name*"
       />
       <TextField
-        onChangeText={setLastName}
-        value={lastName}
+        control={control}
         placeholder="last name"
         inputMode="text"
         label="Last Name*"
       />
       <TextField
-        onChangeText={setBirthDate}
-        value={birthDate}
+        control={control}
         placeholder="MM/DD/YYYY"
         inputMode="text"
         label="Birth Date*"
       />
       <TextField
-        onChangeText={setSocialSecurity}
-        value={socialSecurity}
+        control={control}
         placeholder="***-**-***"
         inputMode="numeric"
         label="Social Security*"
       />
       <TextField
-        onChangeText={setEmail}
-        value={email}
+        control={control}
         placeholder="random@sample.com"
         inputMode="email"
         label="Email*"
       />
       <TextField
-        onChangeText={setPhone}
-        value={phone}
+        control={control}
         placeholder="704-704-7044"
         inputMode="tel"
         label="Phone*"
       />
       <TextField
-        onChangeText={setHomeAddress}
-        value={homeAddress}
+        control={control}
         placeholder="address"
         inputMode="text"
         label="Home Address*"
       />
       <TextField
-        onChangeText={setCity}
-        value={city}
+        control={control}
         placeholder="city"
         inputMode="text"
         label="City*"
       />
       <TextField
-        onChangeText={setState}
-        value={state}
+        control={control}
         placeholder="state"
         inputMode="text"
         label="State*"
       />
+      <Pressable
+        onPress={handleSubmit((data) => onSave(data))}
+        accessibilityLabel="Next button"
+        style={styles.nextButton}
+      >
+        <Text style={styles.buttonText}>Next</Text>
+      </Pressable>
     </SafeAreaView>
   );
 };
@@ -109,6 +136,18 @@ const styles = StyleSheet.create({
     width: 250,
     borderBottomColor: "darkgrey",
     borderBottomWidth: 5,
+    fontSize: 20,
+  },
+  nextButton: {
+    width: "60%",
+    height: 60,
+    padding: 15,
+    marginTop: 15,
+    backgroundColor: "lightgrey",
+    borderRadius: 20,
+  },
+  buttonText: {
+    textAlign: "center",
     fontSize: 20,
   },
 });
