@@ -29,7 +29,11 @@ const CustomerInformation: React.FC<CustomerInformationProps> = ({}) => {
   };
 
   //Form and context set up
-  const customerFormContext = useForm<Customer>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Customer>({
     defaultValues: {
       firstName: applicationContext.state.customer?.firstName,
       lastName: applicationContext.state.customer?.lastName,
@@ -42,12 +46,6 @@ const CustomerInformation: React.FC<CustomerInformationProps> = ({}) => {
       state: applicationContext.state.customer?.state,
     },
   });
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = customerFormContext;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -105,6 +103,11 @@ const CustomerInformation: React.FC<CustomerInformationProps> = ({}) => {
         inputMode="text"
         label="State*"
       />
+      {errors && (
+        <Text style={{ color: "darkred", fontSize: 15 }}>
+          Please make sure to fill out all fields correctly!
+        </Text>
+      )}
       <Pressable
         onPress={handleSubmit((data) => onSave(data))}
         accessibilityLabel="Next button"

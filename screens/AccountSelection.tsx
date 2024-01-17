@@ -17,26 +17,28 @@ const AccountSelection: React.FC<AccountSelectionProps> = ({}) => {
   const applicationContext = useContext(ApplicationContext);
 
   //Handles the on submit action
-  const onSave = (accountTypes: AccountType[]) => {
-    applicationContext.updateAccountTypes(accountTypes);
+  const onSave = (formValues: FormValues) => {
+    applicationContext.updateAccountType(formValues.accountType);
 
     //navigate to CustomerInformation screen
     navigation.navigate("CustomerInformation");
   };
 
-  const accountFormContext = useForm<AccountType[]>({});
+  type FormValues = {
+    accountType: AccountType;
+  };
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = accountFormContext;
+  } = useForm<FormValues>();
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <Controller
         control={control}
-        name={""}
+        name="accountType"
         rules={{
           required: true,
         }}
@@ -73,7 +75,11 @@ const AccountSelection: React.FC<AccountSelectionProps> = ({}) => {
           </View>
         )}
       />
-
+      {errors.accountType && (
+        <Text style={{ color: "darkred", fontSize: 15 }}>
+          Please make a selection. Required!
+        </Text>
+      )}
       <Pressable
         onPress={handleSubmit((data) => onSave(data))}
         accessibilityLabel="Next button"
@@ -88,7 +94,6 @@ const AccountSelection: React.FC<AccountSelectionProps> = ({}) => {
 const styles = StyleSheet.create({
   container: {
     display: "flex",
-    flex: 1,
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",

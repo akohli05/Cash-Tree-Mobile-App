@@ -1,12 +1,11 @@
 import { Control, Controller } from "react-hook-form";
 import { StyleSheet, TextInput, View, Text } from "react-native";
-import { Customer } from "../context/ApplicationContext";
 
 type TextFieldProps = {
   placeholder: string;
   inputMode: string;
   label: string;
-  control: Control<Customer, any>;
+  control: Control<any, any>;
 };
 
 const TextField: React.FC<TextFieldProps> = ({

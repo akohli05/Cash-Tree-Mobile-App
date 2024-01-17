@@ -14,6 +14,8 @@ import AccountSelection from "./screens/AccountSelection";
 import CreateAccountForm from "./screens/CreateAccountForm";
 import CustomerInformation from "./screens/CustomerInformation";
 import Terms from "./screens/Terms";
+import SubmitSplash from "./screens/SubmitSplash";
+import Success from "./screens/Success";
 
 export type StackParamList = {
   SplashScreen: undefined;
@@ -23,6 +25,8 @@ export type StackParamList = {
   AccountSelection: undefined;
   CustomerInformation: undefined;
   Terms: undefined;
+  SubmitSplash: undefined;
+  Success: undefined;
 };
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -129,6 +133,16 @@ export default function App() {
           name="Terms"
           component={Terms}
           options={{ header: () => <Header title="Terms" /> }}
+        />
+        <Stack.Screen
+          name="SubmitSplash"
+          component={SubmitSplash}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Success"
+          component={Success}
+          options={{ header: () => <Header title="CashTree" /> }}
         />
       </Stack.Navigator>
     </NavigationContainer>
