@@ -2,16 +2,26 @@ import { Text, StyleSheet, Pressable } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StackParamList } from "../App";
 import { SafeAreaView } from "react-native-safe-area-context";
-import React from "react";
+import React, { useContext } from "react";
+import { ApplicationContext } from "../context/ApplicationContext";
 
 type SuccessProps = {
   navigation: NativeStackNavigationProp<StackParamList>;
 };
 
 const Success: React.FC<SuccessProps> = ({ navigation }) => {
+  const applicationContext = useContext(ApplicationContext);
+
+  const accountType = applicationContext.state.accountType;
+
+  const { firstName, lastName } = applicationContext.state.customer;
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Success! {"\n"}Your account is now open!</Text>
+      <Text style={styles.title}>
+        Congrats, {firstName} {lastName}! {"\n"}Your {accountType} account is
+        now open!
+      </Text>
       <Pressable
         onPress={() => navigation.navigate("Home")}
         accessibilityLabel="Go to Home button"

@@ -32,7 +32,7 @@ const CustomerInformation: React.FC<CustomerInformationProps> = ({}) => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<Customer>({
     defaultValues: {
       firstName: applicationContext.state.customer?.firstName,
@@ -47,71 +47,86 @@ const CustomerInformation: React.FC<CustomerInformationProps> = ({}) => {
     },
   });
 
+  console.log("sdfsfsdf", JSON.stringify(errors.firstName));
   return (
     <SafeAreaView style={styles.container}>
       <TextField
+        inputName="firstName"
         control={control}
+        error={errors.firstName}
         placeholder="first name"
         inputMode="text"
         label="First Name*"
       />
       <TextField
+        inputName="lastName"
         control={control}
+        error={errors.lastName}
         placeholder="last name"
         inputMode="text"
         label="Last Name*"
       />
       <TextField
+        inputName="birthDate"
         control={control}
+        error={errors.birthDate}
         placeholder="MM/DD/YYYY"
         inputMode="text"
         label="Birth Date*"
       />
       <TextField
+        inputName="socialSecurity"
         control={control}
+        error={errors.socialSecurity}
         placeholder="***-**-***"
         inputMode="numeric"
         label="Social Security*"
       />
       <TextField
+        inputName="email"
         control={control}
+        error={errors.email}
         placeholder="random@sample.com"
         inputMode="email"
         label="Email*"
       />
       <TextField
+        inputName="personalPhone"
         control={control}
+        error={errors.personalPhone}
         placeholder="704-704-7044"
         inputMode="tel"
         label="Phone*"
       />
       <TextField
+        inputName="address"
         control={control}
+        error={errors.address}
         placeholder="address"
         inputMode="text"
         label="Home Address*"
       />
       <TextField
+        inputName="city"
         control={control}
+        error={errors.city}
         placeholder="city"
         inputMode="text"
         label="City*"
       />
       <TextField
+        inputName="state"
         control={control}
+        error={errors.state}
         placeholder="state"
         inputMode="text"
         label="State*"
       />
-      {errors && (
-        <Text style={{ color: "darkred", fontSize: 15 }}>
-          Please make sure to fill out all fields correctly!
-        </Text>
-      )}
+
       <Pressable
         onPress={handleSubmit((data) => onSave(data))}
         accessibilityLabel="Next button"
-        style={styles.nextButton}
+        style={[styles.nextButton, isValid && { backgroundColor: "#d8bbfc" }]}
       >
         <Text style={styles.buttonText}>Next</Text>
       </Pressable>

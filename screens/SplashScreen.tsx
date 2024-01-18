@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, ImageBackground, Animated } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, Animated } from "react-native";
 import { StackParamList } from "../App";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StackActions } from "@react-navigation/native";
+import Scale from "../assets/scale.svg";
 
 type SplashScreenProps = {
   navigation: NativeStackNavigationProp<StackParamList>;
@@ -16,7 +17,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
 
   const spin = animatedSpin.interpolate({
     inputRange: [0, 1],
-    outputRange: ["0deg", "360deg"],
+    outputRange: ["0deg", "30deg"],
   });
 
   const animateClokwise = Animated.timing(animatedSpin, {
@@ -47,10 +48,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={[styles.background, { backgroundColor: "#c1dc86" }]}>
       <Animated.View style={{ transform: [{ rotate: spin }] }}>
-        <ImageBackground
-          style={styles.image}
-          source={require("../assets/logo.png")}
-        ></ImageBackground>
+        <Scale style={{ height: 200, width: 200 }} />
       </Animated.View>
     </SafeAreaView>
   );

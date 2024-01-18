@@ -31,7 +31,7 @@ const AccountSelection: React.FC<AccountSelectionProps> = ({}) => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FormValues>();
 
   return (
@@ -55,7 +55,7 @@ const AccountSelection: React.FC<AccountSelectionProps> = ({}) => {
               title="Checking"
               value={value}
               onPress={() => {
-                onChange("Checkings");
+                onChange("Checking");
               }}
             />
             <IconCard
@@ -83,7 +83,7 @@ const AccountSelection: React.FC<AccountSelectionProps> = ({}) => {
       <Pressable
         onPress={handleSubmit((data) => onSave(data))}
         accessibilityLabel="Next button"
-        style={styles.nextButton}
+        style={[styles.nextButton, isValid && { backgroundColor: "#d8bbfc" }]}
       >
         <Text style={styles.buttonText}>Next</Text>
       </Pressable>

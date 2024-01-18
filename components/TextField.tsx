@@ -1,36 +1,50 @@
-import { Control, Controller } from "react-hook-form";
+import { Control, Controller, FieldError } from "react-hook-form";
 import { StyleSheet, TextInput, View, Text } from "react-native";
 
 type TextFieldProps = {
   placeholder: string;
   inputMode: string;
+  inputName: string;
   label: string;
   control: Control<any, any>;
+  error?: FieldError;
 };
 
 const TextField: React.FC<TextFieldProps> = ({
   control,
   placeholder,
   inputMode,
+  inputName,
   label,
+  error,
 }) => {
   return (
     <Controller
       control={control}
-      name={label}
+      name={inputName}
       rules={{
         required: true,
       }}
       render={({ field: { onChange, value } }) => (
-        <View style={styles.textFieldContainer}>
-          <Text style={styles.label}>{label}</Text>
+        <View
+          style={[
+            styles.textFieldContainer,
+            error && { borderBottomColor: "darkred" },
+          ]}
+        >
+          <Text style={[styles.label, error && { color: "darkred" }]}>
+            {label}
+          </Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input]}
             onChangeText={onChange}
             value={value}
-            placeholder={placeholder}
+            placeholder={error ? "" : placeholder}
             inputMode={"text" || inputMode}
           />
+          {error && (
+            <Text style={{ color: "darkred", fontSize: 15 }}>Required!</Text>
+          )}
         </View>
       )}
     />

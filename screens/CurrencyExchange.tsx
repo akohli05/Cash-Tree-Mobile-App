@@ -21,7 +21,7 @@ const CurrencyExchange = () => {
   const [responseAmount, setResponseAmount] = useState("");
 
   const baseUrl = "https://www.amdoren.com/api/currency.php";
-  const api = "yourapikey";
+  const api = "tQbKCMjvRs9vmNCVpYzBeix7DPqJ2U";
 
   const currencyConvert = () => {
     axios({
