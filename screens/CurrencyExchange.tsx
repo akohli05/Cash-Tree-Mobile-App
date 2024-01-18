@@ -7,6 +7,7 @@ import {
   View,
   Pressable,
   Alert,
+  KeyboardAvoidingView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import currencyCountries from "../constants/currency";
@@ -21,7 +22,7 @@ const CurrencyExchange = () => {
   const [responseAmount, setResponseAmount] = useState("");
 
   const baseUrl = "https://www.amdoren.com/api/currency.php";
-  const api = "tQbKCMjvRs9vmNCVpYzBeix7DPqJ2U";
+  const api = "yourapikey"; ///amorden has an api limit for the free account
 
   const currencyConvert = () => {
     axios({
@@ -29,7 +30,7 @@ const CurrencyExchange = () => {
       url: `${baseUrl}?api_key=${api}&from=${fromSelectedValue}&to=${toSelectedValue}&amount=${amount}`,
     }).then((response) => {
       const amountConverted = response.data.amount;
-      setResponseAmount(amountConverted.toFixed(4));
+      setResponseAmount(amountConverted.toFixed(2));
     });
   };
 
@@ -56,58 +57,62 @@ const CurrencyExchange = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.currencyText}>Currency Converter</Text>
+    <KeyboardAvoidingView>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.currencyText}>Currency Converter</Text>
 
-      <TextInput
-        onChangeText={onChangeAmount}
-        value={amount}
-        placeholder="Amount*"
-        inputMode="numeric"
-        style={styles.amountField}
-      />
-
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-around",
-          marginTop: 100,
-        }}
-      >
-        <SelectList
-          setSelected={(val: string) => setFromSelected(val)}
-          data={currencyCountries}
-          placeholder="From*"
-          boxStyles={styles.box}
-          inputStyles={styles.selectionText}
-          dropdownStyles={styles.dropdown}
-          dropdownTextStyles={styles.dropdownTextItem}
+        <TextInput
+          onChangeText={onChangeAmount}
+          value={amount}
+          placeholder="Amount*"
+          inputMode="numeric"
+          style={styles.amountField}
         />
 
-        <SelectList
-          setSelected={(val: string) => setToSelected(val)}
-          data={currencyCountries}
-          placeholder="To*"
-          boxStyles={styles.box}
-          inputStyles={styles.selectionText}
-          dropdownStyles={styles.dropdown}
-          dropdownTextStyles={styles.dropdownTextItem}
-        />
-      </View>
-      <Pressable
-        onPress={validation}
-        accessibilityLabel="Convert button"
-        style={styles.currencyConvertButton}
-      >
-        <FontAwesome name="check" size={30} color="black" />
-      </Pressable>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-around",
+            marginTop: 100,
+          }}
+        >
+          <SelectList
+            setSelected={(val: string) => setFromSelected(val)}
+            data={currencyCountries}
+            placeholder="From*"
+            boxStyles={styles.box}
+            inputStyles={styles.selectionText}
+            dropdownStyles={styles.dropdown}
+            dropdownTextStyles={styles.dropdownTextItem}
+          />
 
-      {responseAmount && (
-        <View style={styles.convertedCurrencyBox}>
-          <Text style={styles.convertedCurrencyBoxText}>{responseAmount}</Text>
+          <SelectList
+            setSelected={(val: string) => setToSelected(val)}
+            data={currencyCountries}
+            placeholder="To*"
+            boxStyles={styles.box}
+            inputStyles={styles.selectionText}
+            dropdownStyles={styles.dropdown}
+            dropdownTextStyles={styles.dropdownTextItem}
+          />
         </View>
-      )}
-    </SafeAreaView>
+        <Pressable
+          onPress={validation}
+          accessibilityLabel="Convert button"
+          style={styles.currencyConvertButton}
+        >
+          <FontAwesome name="check" size={30} color="black" />
+        </Pressable>
+
+        {responseAmount && (
+          <View style={styles.convertedCurrencyBox}>
+            <Text style={styles.convertedCurrencyBoxText}>
+              {responseAmount}
+            </Text>
+          </View>
+        )}
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
