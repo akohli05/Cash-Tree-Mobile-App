@@ -17,13 +17,16 @@ The is a front end app modeled after Cash Tree Bank website - https://github.com
 <img src="https://github.com/akohli05/Cash-Tree-Mobile-App/assets/129328516/797a742c-dfb5-4f62-af8c-aca549a3b881" width=200 height = 400 />
 
 ### Account Selection
-<img src="https://github.com/akohli05/Cash-Tree-Mobile-App/assets/129328516/1015af3c-0468-4a6d-bf29-00a682edb7a1" width=200 height = 400 />
+<img src="https://github.com/akohli05/Cash-Tree-Mobile-App/assets/129328516/52a942f7-3678-4946-aa9f-4980f52e8399" width=200 height = 400 />
 
 ### Customer Information
-<img src="https://github.com/akohli05/Cash-Tree-Mobile-App/assets/129328516/40372233-adb6-4ab5-8809-40b9c51db38a" width=200 height = 400 />
+<img src="https://github.com/akohli05/Cash-Tree-Mobile-App/assets/129328516/737d4d6b-1e58-416a-a21b-e7b58f14f5cf" width=200 height = 400 />
 
 ### Terms and Conditions
 <img src="https://github.com/akohli05/Cash-Tree-Mobile-App/assets/129328516/6fe160d2-9ecd-4ca1-b6f1-fe4c86c0cbee" width=200 height = 400 />
 
 ### Creating Account Splash Screen
 <img src="https://github.com/akohli05/Cash-Tree-Mobile-App/assets/129328516/d96ee21c-583d-4ddd-a4c3-bb6f446f051e" width=200 height = 400 />
+
+### Confirmation Page
+<img src="https://github.com/akohli05/Cash-Tree-Mobile-App/assets/129328516/c799761b-4620-458d-9cad-ca8473b818e8" width=200 height = 400 />
