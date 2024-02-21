@@ -8,12 +8,15 @@ import {
   Pressable,
   Alert,
   KeyboardAvoidingView,
+  Platform,
+  AlertStatic,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import currencyCountries from "../constants/currency";
 import { SelectList } from "react-native-dropdown-select-list";
 import axios from "axios";
 import { FontAwesome } from "@expo/vector-icons";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const CurrencyExchange = () => {
   const [amount, onChangeAmount] = useState("");
@@ -22,43 +25,32 @@ const CurrencyExchange = () => {
   const [responseAmount, setResponseAmount] = useState("");
 
   const baseUrl = "https://www.amdoren.com/api/currency.php";
-  const api = "yourapikey"; ///amorden has an api limit for the free account
+  const api = "yourapikey"; ///Note - amorden has an api limit for the free account
 
   const currencyConvert = () => {
     axios({
       method: "get",
       url: `${baseUrl}?api_key=${api}&from=${fromSelectedValue}&to=${toSelectedValue}&amount=${amount}`,
     }).then((response) => {
+      console.log(response.data);
+      if (response.data.error) {
+        Alert.alert("Error!", "Something went wrong. Please try again .");
+      }
       const amountConverted = response.data.amount;
       setResponseAmount(amountConverted.toFixed(2));
     });
   };
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        `${baseUrl}?api_key=${api}&from=${fromSelectedValue}&to=${toSelectedValue}&amount=${amount}`,
-      );
-      const responseJson = await response.json();
-      console.log(responseJson.data);
-      setResponseAmount(responseJson.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const validation = () => {
     if (fromSelectedValue === "" || toSelectedValue === "" || amount === "") {
       console.log("nope");
-      Alert.alert("Error!", "Please make sure you have filled all fields.", [
-        { text: "OK" },
-      ]);
+      Alert.alert("Error!", "Please make sure you have filled all fields.");
     } else currencyConvert();
   };
 
   return (
-    <KeyboardAvoidingView>
-      <SafeAreaView style={styles.container}>
+    <KeyboardAwareScrollView contentContainerStyle={styles.outerContainer}>
+      <SafeAreaView style={styles.innerContainer}>
         <Text style={styles.currencyText}>Currency Converter</Text>
 
         <TextInput
@@ -104,25 +96,27 @@ const CurrencyExchange = () => {
           <FontAwesome name="check" size={30} color="black" />
         </Pressable>
 
-        {responseAmount && (
+        {responseAmount ? (
           <View style={styles.convertedCurrencyBox}>
             <Text style={styles.convertedCurrencyBoxText}>
               {responseAmount}
             </Text>
           </View>
-        )}
+        ) : null}
       </SafeAreaView>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    display: "flex",
+  outerContainer: {
     flex: 1,
-    flexDirection: "column",
+  },
+  innerContainer: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    padding: 24,
   },
   currencyText: {
     position: "absolute",

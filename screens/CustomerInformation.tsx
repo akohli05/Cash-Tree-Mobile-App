@@ -11,6 +11,7 @@ import {
   Customer,
 } from "../context/ApplicationContext";
 import { useContext } from "react";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 type CustomerInformationProps = {};
 
@@ -47,9 +48,8 @@ const CustomerInformation: React.FC<CustomerInformationProps> = ({}) => {
     },
   });
 
-  console.log("sdfsfsdf", JSON.stringify(errors.firstName));
   return (
-    <SafeAreaView style={styles.container}>
+    <KeyboardAwareScrollView contentContainerStyle={styles.container}>
       <TextField
         inputName="firstName"
         control={control}
@@ -130,25 +130,15 @@ const CustomerInformation: React.FC<CustomerInformationProps> = ({}) => {
       >
         <Text style={styles.buttonText}>Next</Text>
       </Pressable>
-    </SafeAreaView>
+    </KeyboardAwareScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
     flex: 1,
-    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-  },
-  bankInformationText: {
-    width: 350,
-    position: "absolute",
-    top: 15,
-    margin: 10,
-    color: "#6db369",
-    fontSize: 20,
   },
   inputField: {
     width: 250,

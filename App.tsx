@@ -16,6 +16,7 @@ import CustomerInformation from "./screens/CustomerInformation";
 import Terms from "./screens/Terms";
 import SubmitSplash from "./screens/SubmitSplash";
 import Success from "./screens/Success";
+import ApplicationProvider from "./context/ApplicationContext";
 
 export type StackParamList = {
   SplashScreen: undefined;
@@ -90,62 +91,64 @@ function Home() {
 
 export default function App() {
   return (
-    <NavigationContainer theme={MyTheme}>
-      <Stack.Navigator
-        initialRouteName="SplashScreen"
-        screenOptions={{
-          headerShown: true,
-        }}
-      >
-        <Stack.Screen
-          name="SplashScreen"
-          component={SplashScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            header: () => <Header title="Dashboard" />,
+    <ApplicationProvider>
+      <NavigationContainer theme={MyTheme}>
+        <Stack.Navigator
+          initialRouteName="SplashScreen"
+          screenOptions={{
+            headerShown: true,
           }}
-        />
-        <Stack.Screen
-          name="LearnMore"
-          component={LearnMore}
-          options={{ header: () => <Header title="Learn More" /> }}
-        />
-        <Stack.Screen
-          name="CreateAccountForm"
-          component={CreateAccountForm}
-          options={{ header: () => <Header title="New Account Form" /> }}
-        />
-        <Stack.Screen
-          name="AccountSelection"
-          component={AccountSelection}
-          options={{ header: () => <Header title="Account Selection" /> }}
-        />
-        <Stack.Screen
-          name="CustomerInformation"
-          component={CustomerInformation}
-          options={{ header: () => <Header title="Basics About You" /> }}
-        />
-        <Stack.Screen
-          name="Terms"
-          component={Terms}
-          options={{ header: () => <Header title="Terms" /> }}
-        />
-        <Stack.Screen
-          name="SubmitSplash"
-          component={SubmitSplash}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Success"
-          component={Success}
-          options={{ header: () => <Header title="CashTree" /> }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+        >
+          <Stack.Screen
+            name="SplashScreen"
+            component={SplashScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{
+              header: () => <Header title="Dashboard" />,
+            }}
+          />
+          <Stack.Screen
+            name="LearnMore"
+            component={LearnMore}
+            options={{ header: () => <Header title="Learn More" /> }}
+          />
+          <Stack.Screen
+            name="CreateAccountForm"
+            component={CreateAccountForm}
+            options={{ header: () => <Header title="New Account Form" /> }}
+          />
+          <Stack.Screen
+            name="AccountSelection"
+            component={AccountSelection}
+            options={{ header: () => <Header title="Account Selection" /> }}
+          />
+          <Stack.Screen
+            name="CustomerInformation"
+            component={CustomerInformation}
+            options={{ header: () => <Header title="Basics About You" /> }}
+          />
+          <Stack.Screen
+            name="Terms"
+            component={Terms}
+            options={{ header: () => <Header title="Terms" /> }}
+          />
+          <Stack.Screen
+            name="SubmitSplash"
+            component={SubmitSplash}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Success"
+            component={Success}
+            options={{ header: () => <Header title="CashTree" /> }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ApplicationProvider>
   );
 }
 

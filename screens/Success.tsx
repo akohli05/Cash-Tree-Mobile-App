@@ -14,13 +14,12 @@ const Success: React.FC<SuccessProps> = ({ navigation }) => {
 
   const accountType = applicationContext.state.accountType;
 
-  const { firstName, lastName } = applicationContext.state.customer;
-
+  const { firstName, lastName, ...data } = applicationContext.state.customer;
+  console.log(firstName);
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
-        Congrats, {firstName} {lastName}! {"\n"}Your {accountType} account is
-        now open!
+        Congrats, {lastName}! {"\n"}Your {accountType} account is now open!
       </Text>
       <Pressable
         onPress={() => navigation.navigate("Home")}
@@ -35,9 +34,7 @@ const Success: React.FC<SuccessProps> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
     flex: 1,
-    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },

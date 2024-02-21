@@ -7,7 +7,6 @@ import Stepper from "react-native-stepper-ui";
 import { useState } from "react";
 import CustomerInformation from "./CustomerInformation";
 import Terms from "./Terms";
-import ApplicationProvider from "../context/ApplicationContext";
 
 type CreateAccountFormProps = {
   navigation: NativeStackNavigationProp<StackParamList>;
@@ -20,19 +19,17 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
 }) => {
   const [active, setActive] = useState(0);
   return (
-    <ApplicationProvider>
-      <SafeAreaView style={styles.container}>
-        <Stepper
-          active={active}
-          content={content}
-          onBack={() => setActive((p) => p - 1)}
-          onFinish={() => alert("Finish")}
-          onNext={() => setActive((p) => p + 1)}
-          buttonStyle={styles.stepperButtons}
-          buttonTextStyle={styles.stepperButtonsText}
-        />
-      </SafeAreaView>
-    </ApplicationProvider>
+    <SafeAreaView style={styles.container}>
+      <Stepper
+        active={active}
+        content={content}
+        onBack={() => setActive((p) => p - 1)}
+        onFinish={() => alert("Finish")}
+        onNext={() => setActive((p) => p + 1)}
+        buttonStyle={styles.stepperButtons}
+        buttonTextStyle={styles.stepperButtonsText}
+      />
+    </SafeAreaView>
   );
 };
 
